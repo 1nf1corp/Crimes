@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/crimesDisplay.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -42,8 +43,78 @@
 </nav>
 
 <div class="container-fluid">
-    <button style="display: none" class=" btn btn-primary" id="showReportBtn"><i class="glyphicon glyphicon-plus-sign"></i> Report Crime</button>
-    <button class=" btn btn-primary" id="hideReportBtn"><i class="glyphicon glyphicon-minus-sign"></i> Report Crime</button>
+    <button class=" btn btn-primary" id="showReportBtn"><i class="glyphicon glyphicon-plus-sign"></i> Report Crime</button>
+    <button style="display: none"  class=" btn btn-primary" id="hideReportBtn"><i class="glyphicon glyphicon-minus-sign"></i> Report Crime</button>
+</div>
+<br>
+<div style="display: none"  id="crimeReportDiv" class="container-fluid">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Enter Your Name:</label>
+            <div class="col-sm-4">
+                <input id="name" name="name" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="phoneNumber">Phone Number:</label>
+            <div class="col-sm-4">
+                <input id="phoneNumber" type="tel" required class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="county">Crime Location:</label>
+            <div class="col-sm-2">
+                <select class="form-control" required id="county" name="location">
+                    <option value disabled selected>County</option>
+                    <option value="Kajiado">Kajiado</option>
+                    <option value="Kajiado">Kajiado</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <select class="form-control" required id="district" name="location">
+                    <option value disabled selected>District</option>
+                </select>
+            </div>
+
+            <div class="col-sm-2">
+                <select class="form-control" required id="location" name="location">
+                    <option value disabled selected>Location</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="description">Description:</label>
+            <div class="col-sm-6">
+                <textarea id="description"  required class="form-control" placeholder="Describe the crime as it happened"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="urgency">Urgency Level:</label>
+           <div class="col-sm-2">
+            <select id="urgency" class="form-control">
+                <option value="1">Very Urgent</option>
+                <option value="2">Normal</option>
+                <option value="3">Low</option>
+            </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="seriousness">Seriousness Level:</label>
+            <div class="col-sm-2">
+                <select id=seriousness class="form-control">
+                    <option value="1">Critical</option>
+                    <option value="2">Normal</option>
+                    <option value="3">Low</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>

@@ -1,0 +1,11 @@
+crime:{
+    crimeID
+    crimeDescription
+    crimeLocation-> county,
+    crimeType
+    seriousness
+    urgency
+
+}
+
+Mwala
