@@ -8,4 +8,55 @@ crime:{
 
 }
 
-Mwala
+
+Tables:
+Staff->username, password, staffID, locationID, fullName, role
+crime->crimeId, reporterName, reporterPhoneNumber, crimeLocation, crimeDescription, urgency, seriousness, attended
+counties->countyName, countyID
+districts->districtName, districtID, countyID
+Locations->locationName, locationID, districtID
+Stations->stationName, stationID, locationID
+
+
+districts and counties should be stored just in php files or xml
+
+Sample counties: machakos, kiambu, mombasa
+
+Kiambu:     Gatundu (Gatundu North, Gatundu South),Ruiru (Juja, Ruiru, Kimbo)
+machakos:   Machakos(Machakos town, Kyumbi, masii), Kangundo (Tala, Kinyui)
+Mombasa:    (Shanzu, ukunda)
+
+
+
+
+        <form role="form" name="approveUsersForm" method="post">
+            <table class="table-bordered table-responsive table-hover">
+                <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Full Name</th>
+                    <th>Staff ID </th>
+                    <th>Role</th>
+                </tr>
+                </thead>
+
+                <?php
+                    if($results->num_rows > 0){
+                        while ($row = $results->fetch_assoc()){
+                ?>
+                            <tr>
+                                <td ><input type="checkbox" name="checked_id[]" class="checkbox" value="<?php echo $row['studentID'] ?>">
+                                <td ><?php echo $row['studentFullname']; ?></td>
+                                <td><?php echo $row['studentEmail']; ?></td>
+                                <td><?php echo $row['studentID']; ?></td>
+                                <td><?php echo $row['studentPhone']; ?></td>
+                                <td><?php echo $row['createDate']; ?></td>
+                                <td><?php echo $row['studentStatus']; ?></td>
+                                <td><?php echo $row['studentStatus']; ?></td>
+                            </tr>
+                        <?php } }else{ ?>
+                        <tr><td colspan="5">No records found.</td></tr>
+                    <?php } ?>
+            </table>
+            <input type="submit" class="btn btn-danger" name="delete_bulk" value="Delete" />
+        </form>
