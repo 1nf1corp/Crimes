@@ -23,21 +23,10 @@ class Staff
     }
 
     public function createAccount(){
-        //database connection
-        $serverName = "localhost";
-        $username = "";
-        $password = "";
-        $dbName = "";
-
-        $connection=new mysqli($serverName, $username, $password, $dbName);
-        if ($connection->connect_error){
-            die ("Server Error. Please contact administrator");
-        }
-        //change to suit your needs
-        $createSQL="INSERT INTO `Staff`(`title`, `firstName`, `middleName`, `lastName`, `email`, `role`, `username`, `securityQuestion`, `securityAnswer`, `staffID`, `password`)
-VALUES ('$this->title','$this->firstName','$this->middleName','$this->lastName','$this->email','$this->role','$this->username','$this->securityQuestion','$this->securityAnswer','$this->staffID','$this->password')";
-
-        if ($connection->query($createSQL) == TRUE) {
+        require_once "connect.php";
+        $connection=connectDB();
+        $signUpSql="INSERT INTO `Staff`(`staffID`, `name`, `password`, `locationID`, `role`) VALUES ('$this->staffID','$this->fullName','$this->password','$this->stationID','$this->role')";
+        if ($connection->query($signUpSql) == TRUE) {
             $result= 1;
         } else {
             $result= 0;
@@ -46,19 +35,29 @@ VALUES ('$this->title','$this->firstName','$this->middleName','$this->lastName',
 
     }
 
-    public function logIn(){
-        //database connection
-        $serverName = "localhost";
-        $username = "";
-        $password = "";
-        $dbName = "";
+    public function logIn($staffID, $password1)
+    {
+        $data = array();
+        require_once "connect.php";
+        $connection = connectDB();
 
-        $connection=new mysqli($serverName, $username, $password, $dbName);
-        if ($connection->connect_error){
-            die ("Server Error. Please contact administrator");
+        $sql="SELECT staffID, name, locationID, role, confirmed FROM Staff WHERE staffID='$staffID' AND password='$password1'";
+
+        $result = $connection->query($sql);
+
+        if ($result == TRUE) {
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $data['staffID'] = $row['staffID'];
+                $data['name'] = $row['name'];
+                $data['locationID'] = $row['locationID'];
+                $data['confirmed'] = $row['confirmed'];
+            } else {
+                die ("<script>alert ('Invalid Username or Password. Please Enter Details again'); window.location.assign('index.html');</script>");
+            }
+        } else {
+            die("Server Error. Please contact administrator".$connection->error);
         }
-        $loginSql="";
-        $result=$connection->query($loginSql);
-        if ($result==TRUE){/*Success return staff details*/}else{/*Login Error*/}
+        return $data;
     }
 }

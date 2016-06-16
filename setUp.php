@@ -5,7 +5,7 @@
  * Date: 6/14/16
  * Time: 12:15 PM
  */
-require_once "connect.php";
+//require_once "connect.php";
 
 //create database Crimes
 
@@ -36,11 +36,12 @@ if ($conn->connect_error) {
 }
 
 $staffTableSql="CREATE TABLE Staff(
-staffID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+staffID VARCHAR (10) PRIMARY KEY,
 name VARCHAR (50) NOT NULL,
 password VARCHAR (64),
 locationID VARCHAR (30) NOT NULL,
-role VARCHAR (10) NOT NULL
+role VARCHAR (10) NOT NULL,
+confirmed VARCHAR (10) DEFAULT 'FALSE'
 )";
 if ($conn->query($staffTableSql) === TRUE) {
     echo "Table Staff created successfully<br>";
