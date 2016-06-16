@@ -72,7 +72,7 @@ if ($conn->query($crimeTableSql) === TRUE) {
 
 $countiesTableSql="CREATE TABLE Counties (
 countyID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-countyName VARCHAR (20) NOT NULL
+countyName VARCHAR (20) UNIQUE NOT NULL
 )";
 
 if ($conn->query($countiesTableSql) === TRUE) {

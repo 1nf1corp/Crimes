@@ -48,11 +48,11 @@ $results=$connection->query($staffSql);
     <button class=" btn btn-primary" id="showCountiesBtn"><i class="glyphicon glyphicon-plus-sign"></i> Add Counties</button>
     <button style="display: none" class=" btn btn-primary" id="hideCountiesBtn"><i class="glyphicon glyphicon-minus-sign"></i> Add Counties</button>
     <div class="container-fluid" id="addCountiesDiv" style="display: none">
-        <form class="form-horizontal" method="post" id="addCountiesForm" onsubmit="return addCounty();">
+        <form class="form-horizontal" method="post" id="addCountiesForm" action="addCounty.php">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Enter County Name:</label>
                 <div class="col-sm-2">
-                    <input  class="form-control" id="countyName" name="countyName" required placeholder="Kitui">
+                    <input onkeyup="validateCounty()"  class="form-control" id="countyName" name="countyName" required placeholder="Kitui">
                 </div>
                 <div class="col-sm-2">
                     <button id="addCountyBtn" type="submit" class="btn btn-primary">Add County</button>
@@ -65,26 +65,39 @@ $results=$connection->query($staffSql);
     </div>
     <br><br>
 
+
     <!--Add Districts-->
     <button class=" btn btn-primary" id="showDistrictsBtn"><i class="glyphicon glyphicon-plus-sign"></i> Add Districts</button>
     <button style="display: none" class=" btn btn-primary" id="hideDistrictBtn"><i class="glyphicon glyphicon-minus-sign"></i> Add District</button>
-    <div class="container-fluid" id="addDistrictsDiv" style="display: none">
+    <div class="container-fluid" id="addDistrictsDiv" style="display: block">
         <form class="form-horizontal" method="post" id="addDistrictForm">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Enter District Name:</label>
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <input  class="form-control" id="districtName" name="districtName" required placeholder="Ruiru">
                 </div>
                 <div class="col-sm-2">
-                    <select id="countyName" name="countyName" required>
-                        <option selected disabled>Select County</option>
+                    <select id="countyName1" name="countyName1" required onkeyup="checkCounty()">
+                        <option disabled selected>Select Counties</option>
+                        <?php
+                        require_once "connect.php";
+                        $countiesSql="SELECT * FROM Counties";
+                        $result = $connection->query($countiesSql);
+                        if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                                echo "<option value=". $row['countyID'].">".$row["countyName"]."<option>";
+                            }
+                        } else {
+                            echo "<option disabled>Please Add Counties First</option>";
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col-sm-2">
                     <button type="submit" class="btn btn-primary">Add District</button>
                 </div>
                 <div class="col-sm-4">
-                    <label id="countyFeedback" class="control-label"></label>
+                    <label id="county1Feedback" class="control-label"></label>
                 </div>
             </div>
         </form>
@@ -100,11 +113,6 @@ $results=$connection->query($staffSql);
                 <label class="col-sm-2 control-label">Enter Location Name:</label>
                 <div class="col-sm-2">
                     <input  class="form-control" id="locationName" name="locationName" required placeholder="Katoloni">
-                </div>
-                <div class="col-sm-2">
-                    <select id="countyName" name="countyName" required>
-                        <option selected disabled>Select County</option>
-                    </select>
                 </div>
                 <div class="col-sm-2">
                     <select id="locationName" name="locationName" required>
@@ -131,16 +139,6 @@ $results=$connection->query($staffSql);
                 <label class="col-sm-2 control-label">Enter Station Name:</label>
                 <div class="col-sm-2">
                     <input  class="form-control" id="stationName" name="stationName" required placeholder="Juja">
-                </div>
-                <div class="col-sm-2">
-                    <select id="countyName" name="countyName" required>
-                        <option selected disabled>Select County</option>
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <select id="districtName" name="districtName" required>
-                        <option selected disabled>Select District</option>
-                    </select>
                 </div>
                 <div class="col-sm-2">
                     <select id="locationName" name="locationName" required>
