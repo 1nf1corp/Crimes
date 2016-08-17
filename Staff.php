@@ -52,6 +52,7 @@ class Staff
                 $data['name'] = $row['name'];
                 $data['locationID'] = $row['locationID'];
                 $data['confirmed'] = $row['confirmed'];
+                $data['role']=$row['role'];
             } else {
                 die ("<script>alert ('Invalid Username or Password. Please Enter Details again'); window.location.assign('index.html');</script>");
             }

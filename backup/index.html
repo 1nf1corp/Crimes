@@ -132,7 +132,7 @@
     <button id="signUpBtnShow" class="btn btn-primary"><i class="glyphicon glyphicon-plus-sign"></i> Create Account</button>
     <button style="display: none" id="signUpBtnHide" class="btn btn-primary"><i class="glyphicon glyphicon-minus-sign"></i> Create Account</button>
 
-    <form class="form-horizontal" role="form" method="post" id="signUpForm" style="display: block;" action="signUp.php">
+    <form class="form-horizontal" role="form" method="post" id="signUpForm" style="display: none;" onsubmit="createAccount()">
         <div class="form-group">
             <label class=" col-sm-2 control-label" for="firstName">Full Name:</label>
             <div class="col-sm-2">
@@ -155,24 +155,26 @@
         </div>
         <label class="col-sm-4" id="staffIDError"></label>
         </div>
+
         <div class="form-group">
-            <label class="control-label col-sm-2" for="station">Station:</label>
-            <div class="col-sm-2">
-                <select id="station" name="station" required class="form-control">
-                    <option disabled selected>Enter Station Name</option>
-                    <option value="Juja">Juja </option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="role">Role:</label>
+            <label class="col-sm-2 control-label" for="role" >Role:</label>
             <div class="col-sm-4">
-                <select name="role" id="role" class="form-control">
+                <select name="role" id="role" class="form-control" onkeyup="roleControl()">
                     <option disabled selected>Enter Role</option>
                     <option value="Officer">Police Officer</option>
                     <option value="OCS">Officer Commanding Station (OCS)</option>
                     <option value="OCPD">Officer Commanding Police Department (OCPD)</option>
                     <option value="CCP">County Commissioner of Police (CCP)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group" id="stationDiv">
+            <label class="control-label col-sm-2" for="station">Station:</label>
+            <div class="col-sm-2">
+                <select id="station" name="station" required class="form-control">
+                    <option disabled selected>Enter Station Name</option>
+                    <option value="Juja">Juja </option>
                 </select>
             </div>
         </div>

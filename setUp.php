@@ -11,7 +11,7 @@
 
 $serverName = "localhost";
 $username = "root";
-$password = "";
+$password = ""; //put yours
 
 $connection=new mysqli($serverName, $username, $password);
 if ($connection->connect_error){
@@ -54,14 +54,12 @@ $crimeTableSql="CREATE TABLE Crimes(
 crimeID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 reporterName VARCHAR (50) NOT NULL,
 phoneNumber VARCHAR (20) NOT NULL,
-locationID VARCHAR (20) NOT NULL,
-desription VARCHAR (2000) NOT NULL,
+stationID VARCHAR (20) NOT NULL,
+districtID VARCHAR (20) NOT NULL,
+description VARCHAR (2000) NOT NULL,
 urgency INT(3) NOT NULL,
 seriousness INT(3) NOT NULL,
-allocated INT (3),
-staffID INT (20),
-confirmed INT (3),
-confirmerID INT (3)
+attended INT (3)
 )";
 if ($conn->query($crimeTableSql) === TRUE) {
     echo "Table Crimes created successfully<br>";
@@ -95,23 +93,10 @@ if ($conn->query($districtsTableSql) === TRUE) {
 }
 
 
-$locationsTableSql="CREATE TABLE Locations (
-locationID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-locationName VARCHAR (20) NOT NULL,
-districtID INT (6) NOT NULL
-)";
-
-if ($conn->query($locationsTableSql) === TRUE) {
-    echo "Table Locations created successfully <br>";
-} else {
-    echo "Error creating table: " . $conn->error;
-}
-
-
 $stationsTableSql="CREATE TABLE Stations (
 stationID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 stationName VARCHAR (20) NOT NULL,
-locationID VARCHAR (20) NOT NULL
+districtID VARCHAR (20) NOT NULL
 )";
 
 if ($conn->query($stationsTableSql) === TRUE) {

@@ -9,35 +9,41 @@
 require_once "connect.php";
 class crime
 {
-    private $crimeID;
     private $description;
-    private $locationID;
-    private $type;
+    private $reporterName;
+    private $phoneNumber;
+    private $stationID;
+    private $districtID;
     private $seriousness;
     private $urgency;
-    private $staffID="";
-    private $allocated="FALSE";
-    private $confirmed="FALSE";
-    private $confirmerID="";
+    private $attended=0; //0 is not attended, 1 is attended
 
-    public function setCrime($crimeID, $description, $locationID, $type, $seriousness, $urgency){
-        $this->crimeID=$crimeID;
+
+    public function setCrime($reporterName, $phoneNumber, $stationID, $districtID,  $description, $urgency, $seriousness){
+        $this->reporterName=$reporterName;
+        $this->phoneNumber=$phoneNumber;
         $this->description=$description;
-        $this->locationID=$locationID;
-        $this->type=$type;
+        $this->stationID=$stationID;
+        $this->districtID=$districtID;
         $this->seriousness=$seriousness;
         $this->urgency=$urgency;
     }
 
-    private function storeCrime(){
+    public function storeCrime(){
+        $result=0;
         //database connection --> Sample
-        $connection=connectFn();
-        $insertCrimeSql="";
-
+        $insertCrimeSql="INSERT INTO Crimes (reporterName, phoneNumber, stationID, districtID, description, urgency, seriousness, attended)
+VALUES ('$this->reporterName', '$this->phoneNumber', '$this->stationID','$this->districtID',
+'$this->description', '$this->urgency', '$this->seriousness', '$this->attended')";
+        require_once "connect.php";
+        $connection=connectDB();
         if ($connection->query($insertCrimeSql) == TRUE) {
-        $result= 1;
+            $result=1;
+            //echo "<script>alert('Successfully Reported Crime. We are attending to it');</script>";
     } else {
-            $result= 0;
+            echo  $connection->error;
+            die();
+            //echo "<script>alert('{$connection->error}');</script>";
         }
         return $result;
     }

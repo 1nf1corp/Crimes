@@ -64,6 +64,16 @@ $(document).ready(function () {
         $("#signUpBtnHide").hide();
         $("#signUpForm").hide();
     });
+    $("#showApproveBtn").click( function (){
+        $("#showApproveBtn").hide();
+        $("#hideApproveBtn").show();
+        $("#approveUsersDiv").show();
+    });
+    $("#hideApproveBtn").click( function (){
+        $("#showApproveBtn").show();
+        $("#hideApproveBtn").hide();
+        $("#approveUsersDiv").hide();
+    });
 
 });
 
